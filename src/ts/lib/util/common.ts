@@ -979,9 +979,9 @@ class UtilCommon {
 			const aliases = new Set(components.languages[lang].alias 
 				? [].concat(components.languages[lang].alias) 
 				: []);
-			const aliasTitles = components.languages[lang].aliasTitles || [];
+			const aliasTitles = components.languages[lang].aliasTitles || {};
 			const title = components.languages[lang].title || lang;
-			for (const key of aliasTitles) {
+			for (const key in aliasTitles) {
 				result.push({id: key, name: aliasTitles[key], aliases: []});
 				aliases.delete(key);
 			}
