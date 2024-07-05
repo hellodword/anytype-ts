@@ -26,6 +26,7 @@ import Preview from './preview';
 import Highlight from './highlight';
 import Animation from './animation';
 import { translate } from './translate';
+import { getPrismComponents, prismLanguagesAndAliases } from './prismhelper';
 
 export {
 	I,
@@ -43,6 +44,8 @@ export {
 	Relation,
 	Dataview,
 	translate,
+	getPrismComponents,
+	prismLanguagesAndAliases,
 	dispatcher,
 	Mapper,
 	Encode, 

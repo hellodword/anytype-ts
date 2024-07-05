@@ -5,24 +5,19 @@ import $ from 'jquery';
 import raf from 'raf';
 import { observer, } from 'mobx-react';
 import { Select, Marker, Loader, IconObject, Icon, Editable } from 'Component';
-import { I, C, S, U, J, keyboard, Key, Preview, Mark, focus, Storage, translate, analytics, Renderer } from 'Lib';
+import {
+	I, C, S, U, J, keyboard, Key, Preview, Mark, focus, Storage,
+	translate, analytics, Renderer,
+	getPrismComponents, prismLanguagesAndAliases,
+} from 'Lib';
 
 interface Props extends I.BlockComponent {
 	onToggle?(e: any): void;
 };
 
-// Prism languages
-const langs = [
-	'clike', 'c', 'cpp', 'csharp', 'abap', 'arduino', 'bash', 'basic', 'clojure', 'coffeescript', 'dart', 'diff', 'docker', 'elixir',
-	'elm', 'erlang', 'flow', 'fortran', 'fsharp', 'gherkin', 'graphql', 'groovy', 'go', 'haskell', 'json', 'latex', 'less', 'lisp',
-	'livescript', 'lua', 'markdown', 'makefile', 'matlab', 'nginx', 'nix', 'objectivec', 'ocaml', 'pascal', 'perl', 'php', 'powershell', 'prolog',
-	'python', 'r', 'reason', 'ruby', 'rust', 'sass', 'java', 'scala', 'scheme', 'scss', 'sql', 'swift', 'typescript', 'vbnet', 'verilog',
-	'vhdl', 'visual-basic', 'wasm', 'yaml', 'javascript', 'css', 'markup', 'markup-templating', 'csharp', 'php', 'go', 'swift', 'kotlin',
-	'wolfram', 'dot', 'toml', 'bsl', 'cfscript', 'gdscript', 'cmake', 'solidity',
-];
-for (const lang of langs) {
-	require(`prismjs/components/prism-${lang}.js`);
-};
+for (const lang of getPrismComponents()) {
+  require(`prismjs/components/prism-${lang}.js`);
+}
 
 const BlockText = observer(class BlockText extends React.Component<Props> {
 
@@ -122,9 +117,9 @@ const BlockText = observer(class BlockText extends React.Component<Props> {
 				
 			case I.TextStyle.Code: {
 				const options: I.Option[] = [];
-				for (const i in J.Lang.code) {
-					options.push({ id: i, name: J.Lang.code[i] });
-				};
+				for (const prismLang of prismLanguagesAndAliases) {
+					options.push(prismLang);
+				}
 
 				spellcheck = false;
 				
@@ -268,6 +263,9 @@ const BlockText = observer(class BlockText extends React.Component<Props> {
 				lang = J.Constant.default.codeLang;
 				grammar = Prism.languages[lang];
 			};
+
+			const realLang = prismLanguagesAndAliases.find(item => item.id == lang || item.aliases.includes(lang));
+			lang = realLang?.id || lang;
 
 			if (this.refLang) {
 				this.refLang.setValue(lang);
