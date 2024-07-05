@@ -2,6 +2,8 @@ import $ from 'jquery';
 import DOMPurify from 'dompurify';
 import { I, C, S, J, U, Preview, Renderer, translate, Mark } from 'Lib';
 
+const components = require(`prismjs/components.js`);
+const IGNORED_LANGUAGES = ['meta'];
 const TEST_HTML = /<[^>]*>/;
 
 class UtilCommon {
@@ -945,6 +947,64 @@ class UtilCommon {
 		return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 	};
 
+	getPrismLanguageCodes () {
+		return Object.keys(components.languages).filter(x => !IGNORED_LANGUAGES.includes(x));
+	}
+
+	getPrismComponentRequirements (lang: string) {
+		let result = [];
+		const required = components.languages[lang].require || [];
+		if (Array.isArray(required)) {
+			for (const requiredLang of required) {
+				result = result.concat(this.getPrismComponentRequirements(requiredLang));
+			}
+		} else {
+			result = result.concat(this.getPrismComponentRequirements(required));
+		}
+		const optionals = components.languages[lang].optional || [];
+		if (Array.isArray(optionals)) {
+			for (const optional of optionals) {
+				result = result.concat(this.getPrismComponentRequirements(optional));
+			}
+		} else {
+			result = result.concat(this.getPrismComponentRequirements(optionals));
+		}
+		result.push(lang);
+		return result;
+	}
+
+	getPrismLanguagesAndAliases () {
+		const result = [];
+		this.getPrismLanguageCodes().forEach(lang => {
+			const aliases = new Set(components.languages[lang].alias 
+				? [].concat(components.languages[lang].alias) 
+				: []);
+			const aliasTitles = components.languages[lang].aliasTitles || [];
+			const title = components.languages[lang].title || lang;
+			for (const key of aliasTitles) {
+				result.push({id: key, name: aliasTitles[key], aliases: []});
+				aliases.delete(key);
+			}
+			result.push({id: lang, name: title, aliases: [...aliases]});
+		});
+		return result;
+	};
+
+	getPrismComponents (): string[] {
+		let result = [];
+		for (const lang of this.getPrismLanguageCodes()) {
+			result = result.concat(this.getPrismComponentRequirements(lang));
+		}
+		return [...new Set(result)];
+	}
+
+	getRealPrismLanguageCode (lang: string): string {
+		if (!components.languages[lang]) {
+			return ''
+		}
+	}
+
+	prismLanguagesAndAliases = this.getPrismLanguagesAndAliases();
 };
 
 export default new UtilCommon();

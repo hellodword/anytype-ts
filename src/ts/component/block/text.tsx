@@ -5,19 +5,15 @@ import $ from 'jquery';
 import raf from 'raf';
 import { observer, } from 'mobx-react';
 import { Select, Marker, Loader, IconObject, Icon, Editable } from 'Component';
-import {
-	I, C, S, U, J, keyboard, Key, Preview, Mark, focus, Storage,
-	translate, analytics, Renderer,
-	getPrismComponents, prismLanguagesAndAliases,
-} from 'Lib';
+import { I, C, S, U, J, keyboard, Key, Preview, Mark, focus, Storage, translate, analytics, Renderer } from 'Lib';
 
 interface Props extends I.BlockComponent {
 	onToggle?(e: any): void;
 };
 
-for (const lang of getPrismComponents()) {
-  require(`prismjs/components/prism-${lang}.js`);
-}
+for (const lang of U.Common.getPrismComponents()) {
+	require(`prismjs/components/prism-${lang}.js`);
+};
 
 const BlockText = observer(class BlockText extends React.Component<Props> {
 
@@ -117,9 +113,9 @@ const BlockText = observer(class BlockText extends React.Component<Props> {
 				
 			case I.TextStyle.Code: {
 				const options: I.Option[] = [];
-				for (const prismLang of prismLanguagesAndAliases) {
-					options.push(prismLang);
-				}
+				for (const lang of U.Common.prismLanguagesAndAliases) {
+					options.push(lang);
+				};
 
 				spellcheck = false;
 				
@@ -264,7 +260,7 @@ const BlockText = observer(class BlockText extends React.Component<Props> {
 				grammar = Prism.languages[lang];
 			};
 
-			const realLang = prismLanguagesAndAliases.find(item => item.id == lang || item.aliases.includes(lang));
+			const realLang = U.Common.prismLanguagesAndAliases.find(item => item.id == lang || item.aliases.includes(lang));
 			lang = realLang?.id || lang;
 
 			if (this.refLang) {
