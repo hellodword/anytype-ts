@@ -243,6 +243,8 @@ class MenuObject extends React.Component<I.Menu> {
 			return section.children.length > 0;
 		});
 
+		// TODO dynamically adding
+		sections.push({ children: [ { id: 'ext:id1:func1', name: 'Extension 1' } ] });
 		return sections;
 	};
 	
@@ -506,6 +508,11 @@ class MenuObject extends React.Component<I.Menu> {
 				break;
 			};
 		};
+
+		if (item.id.startsWith('ext:')) {
+			// TODO parse item.id, get ext ID and ext function ID, call ext function with a common struct
+
+		}
 		
 		if (close) {
 			this.props.close();
