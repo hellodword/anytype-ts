@@ -536,3 +536,9 @@ export const DeviceList = (response: Rpc.Device.List.Response) => {
 		devices: (response.getDevicesList() || []).map(it => Mapper.From.DeviceInfo(it))
 	};
 };
+
+export const ExtensionGetDeveloperMode = (response: Rpc.Extension.GetDeveloperMode.Response) => {
+	return {
+		developerMode: response.getDeveloperMode(),
+	};
+};

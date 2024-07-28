@@ -2124,8 +2124,8 @@ export const ExtensionListBuckets = (callBack?: (message: any) => void) => {
 	dispatcher.request(ExtensionListBuckets.name, request, callBack);
 };
 
-export const ExtensionGetStatus = (callBack?: (message: any) => void) => {
-	dispatcher.request(ExtensionGetStatus.name, new Commands.Empty(), callBack);
+export const ExtensionGetDeveloperMode = (callBack?: (message: any) => void) => {
+	dispatcher.request(ExtensionGetDeveloperMode.name, new Commands.Empty(), callBack);
 };
 
 export const ExtensionSetDeveloperMode = (mode: boolean, callBack?: (message: any) => void) => {
