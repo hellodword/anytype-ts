@@ -2126,3 +2126,11 @@ export const ExtensionSetMode = (mode: number, callBack?: (message: any) => void
 
 	dispatcher.request(ExtensionSetMode.name, request, callBack);
 };
+
+export const ExtensionInstallByURL = (url: string, callBack?: (message: any) => void) => {
+	const request = new Rpc.Extension.InstallByURL.Request();
+
+	request.setUrl(url);
+
+	dispatcher.request(ExtensionInstallByURL.name, request, callBack);
+};

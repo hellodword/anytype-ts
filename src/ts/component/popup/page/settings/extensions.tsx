@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
-import { Title, Label, Select, Switch } from 'Component';
+import { Title, Label, Select, Switch, Input, Button } from 'Component';
 import { I, S, U, translate, Action, analytics, C } from 'Lib';
 
 const PopupSettingsPageExtensions = observer(class PopupSettingsPageExtensions extends React.Component<I.PopupSettings> {
+	refURL: any = null;
 
 	constructor (props: I.PopupSettings) {
 		super(props);
@@ -17,6 +18,17 @@ const PopupSettingsPageExtensions = observer(class PopupSettingsPageExtensions e
 					<Label text="Enable Developer Mode" />
 					<Switch className="big" onChange={(e: any, v: boolean) => this.onSetMode(v)} />
 				</div>
+				<div className="item">
+					<Label text="Install By URL" />
+					<Input
+						ref={ref => this.refURL = ref}
+						value=""
+					/>
+					<Button 
+						text="Install"
+						onClick={() => this.onInstallByURL()} 
+					/>
+				</div>
 			</React.Fragment>
 		);
 	};
@@ -27,6 +39,16 @@ const PopupSettingsPageExtensions = observer(class PopupSettingsPageExtensions e
 			console.log('ExtensionSetMode', message);
 		});
 	};
+
+	onInstallByURL () {
+		const url: string = this.refURL.getValue();
+
+		console.log('onInstallByURL', url);
+
+		C.ExtensionInstallByURL(url, (message: any) => {
+			console.log('ExtensionInstallByURL', message);
+		});
+	}
 
 });
 
