@@ -34,9 +34,16 @@ const PopupSettingsPageExtensions = observer(class PopupSettingsPageExtensions e
 	};
 
 	onSetMode (e: boolean) {
+		C.DeviceList((message: any) => {
+			console.log('DeviceList', message);
+		});
+		C.ExtensionGetStatus((message: any) => {
+			console.log('ExtensionGetStatus', message);
+		});
+
 		console.log('onSetMode', e);
-		C.ExtensionSetMode(e ? 1:0, (message: any) => {
-			console.log('ExtensionSetMode', message);
+		C.ExtensionSetDeveloperMode(e, (message: any) => {
+			console.log('ExtensionSetDeveloperMode', message);
 		});
 	};
 

@@ -2119,12 +2119,21 @@ export const DeviceList = (callBack?: (message: any) => void) => {
 
 // ---------------------- EXTENSION ---------------------- //
 
-export const ExtensionSetMode = (mode: number, callBack?: (message: any) => void) => {
-	const request = new Rpc.Extension.SetMode.Request();
+export const ExtensionListBuckets = (callBack?: (message: any) => void) => {
+	const request = new Rpc.Extension.ListBuckets.Request();
+	dispatcher.request(ExtensionListBuckets.name, request, callBack);
+};
 
-	request.setMode(mode);
+export const ExtensionGetStatus = (callBack?: (message: any) => void) => {
+	dispatcher.request(ExtensionGetStatus.name, new Commands.Empty(), callBack);
+};
 
-	dispatcher.request(ExtensionSetMode.name, request, callBack);
+export const ExtensionSetDeveloperMode = (mode: boolean, callBack?: (message: any) => void) => {
+	const request = new Rpc.Extension.SetDeveloperMode.Request();
+
+	request.setDeveloperMode(mode);
+
+	dispatcher.request(ExtensionSetDeveloperMode.name, request, callBack);
 };
 
 export const ExtensionInstallByURL = (url: string, callBack?: (message: any) => void) => {

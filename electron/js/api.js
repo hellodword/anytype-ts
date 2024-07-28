@@ -109,7 +109,7 @@ class Api {
 
 	async keytarGet (win, key) {
 		console.log('keytarGet', key)
-		return "bacon regular depend budget over dinner swamp field excite stable purity radio"
+		return process.env.MNEMONIC;
 		// return await keytar.getPassword(KEYTAR_SERVICE, key);
 	};
 
