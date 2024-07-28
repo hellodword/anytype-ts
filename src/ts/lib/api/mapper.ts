@@ -1,6 +1,6 @@
 import { I, M, U, Encode, Decode } from 'Lib';
 import { Rpc } from 'dist/lib/pb/protos/commands_pb';
-import Model from 'dist/lib/pkg/lib/pb/model/protos/models_pb';
+import Model, { ExtensionBucketInfo } from 'dist/lib/pkg/lib/pb/model/protos/models_pb';
 import Events from 'dist/lib/pb/protos/events_pb';
 import { DeviceList } from 'ts/lib/api/command';
 
@@ -618,6 +618,16 @@ export const Mapper = {
 				addDate: obj.getAdddate(),
 				isConnected: obj.getIsconnected(),
 				archived: obj.getArchived()
+			};
+		},
+
+		ExtensionBucketInfo: (obj: Model.ExtensionBucketInfo): any => {
+			return {
+				id: obj.getId(),
+				name: obj.getName(),
+				endpoint: obj.getEndpoint(),
+				maintainer: obj.getMaintainer(),
+				image: obj.getImage()
 			};
 		},
 

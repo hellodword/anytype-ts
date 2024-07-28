@@ -537,6 +537,18 @@ export const DeviceList = (response: Rpc.Device.List.Response) => {
 	};
 };
 
+export const ExtensionListBuckets = (response: Rpc.Extension.ListBuckets.Response) => {
+	return {
+		buckets: (response.getBucketsList() || []).map(it => Mapper.From.ExtensionBucketInfo(it))
+	};
+};
+
+export const ExtensionAddBucket = (response: Rpc.Extension.AddBucket.Response) => {
+	return {
+		bucket: Mapper.From.ExtensionBucketInfo(response.getBucket()),
+	};
+};
+
 export const ExtensionGetDeveloperMode = (response: Rpc.Extension.GetDeveloperMode.Response) => {
 	return {
 		developerMode: response.getDeveloperMode(),

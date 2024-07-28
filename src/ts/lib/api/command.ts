@@ -2124,6 +2124,14 @@ export const ExtensionListBuckets = (callBack?: (message: any) => void) => {
 	dispatcher.request(ExtensionListBuckets.name, request, callBack);
 };
 
+export const ExtensionAddBucket = (bucket: Model.ExtensionBucketInfo, callBack?: (message: any) => void) => {
+	const request = new Rpc.Extension.AddBucket.Request();
+
+	request.setBucket(bucket);
+
+	dispatcher.request(ExtensionAddBucket.name, request, callBack);
+};
+
 export const ExtensionGetDeveloperMode = (callBack?: (message: any) => void) => {
 	dispatcher.request(ExtensionGetDeveloperMode.name, new Commands.Empty(), callBack);
 };
