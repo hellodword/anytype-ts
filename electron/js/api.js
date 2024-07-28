@@ -102,16 +102,20 @@ class Api {
 
 	keytarSet (win, key, value) {
 		if (key && value) {
-			keytar.setPassword(KEYTAR_SERVICE, key, value);
+			console.log('keytarSet', key, value)
+			// keytar.setPassword(KEYTAR_SERVICE, key, value);
 		};
 	};
 
 	async keytarGet (win, key) {
-		return await keytar.getPassword(KEYTAR_SERVICE, key);
+		console.log('keytarGet', key)
+		return "bacon regular depend budget over dinner swamp field excite stable purity radio"
+		// return await keytar.getPassword(KEYTAR_SERVICE, key);
 	};
 
 	keytarDelete (win, key) {
-		keytar.deletePassword(KEYTAR_SERVICE, key);
+		console.log('keytarDelete', key)
+		// keytar.deletePassword(KEYTAR_SERVICE, key);
 	};
 
 	updateCheck (win) {

@@ -12,6 +12,8 @@ import PageAppearance from './page/settings/appearance';
 import PagePhrase from './page/settings/phrase';
 import PageLogout from './page/settings/logout';
 
+import PageExtensions from './page/settings/extensions';
+
 import PagePinIndex from './page/settings/pin/index';
 import PagePinSelect from './page/settings/pin/select';
 import PagePinConfirm from './page/settings/pin/confirm';
@@ -48,6 +50,7 @@ const Components: any = {
 	phrase:				 PagePhrase,
 	membership:			 PageMembership,
 	logout:				 PageLogout,
+	extensions:			 PageExtensions,
 
 	pinIndex:			 PagePinIndex,
 	pinSelect:			 PagePinSelect,
@@ -296,6 +299,7 @@ const PopupSettings = observer(class PopupSettings extends React.Component<I.Pop
 						{ id: 'personal', name: translate('popupSettingsPersonalTitle') },
 						{ id: 'appearance', name: translate('popupSettingsAppearanceTitle') },
 						{ id: 'pinIndex', name: translate('popupSettingsPinTitle'), icon: 'pin', subPages: [ 'pinSelect', 'pinConfirm' ] },
+						{ id: 'extensions', name: 'Extensions' },
 					]
 				},
 				{ name: translate('popupSettingsAccountAndKeyTitle'), children: settingsVault }

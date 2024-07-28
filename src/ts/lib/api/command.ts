@@ -2116,3 +2116,13 @@ export const BroadcastPayloadEvent = (payload: any, callBack?: (message: any) =>
 export const DeviceList = (callBack?: (message: any) => void) => {
 	dispatcher.request(DeviceList.name, new Commands.Empty(), callBack);
 };
+
+// ---------------------- EXTENSION ---------------------- //
+
+export const ExtensionSetMode = (mode: number, callBack?: (message: any) => void) => {
+	const request = new Rpc.Extension.SetMode.Request();
+
+	request.setMode(mode);
+
+	dispatcher.request(ExtensionSetMode.name, request, callBack);
+};
