@@ -597,6 +597,11 @@ class MenuBlockAction extends React.Component<I.Menu, State> {
 		const { blockId, blockIds, rootId } = data;
 		const block = S.Block.getLeaf(rootId, blockId);
 
+		if (item.itemId.startsWith('ext:')) {
+			// TODO parse item.itemId, get ext ID and ext function ID, call ext function with a common struct
+			console.log('ext: clicked', rootId, item, block);
+		}
+
 		if (!block) {
 			return;
 		};

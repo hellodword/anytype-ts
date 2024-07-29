@@ -197,6 +197,7 @@ class UtilMenu {
 		
 		if (hasFile) {
 			items.push({ id: 'download', icon: 'download', name: translate('commonDownload') });
+			items.push({ id: 'ext:id1:func2', name: 'Extension 4' });
 		};
 
 		if (hasBookmark) {

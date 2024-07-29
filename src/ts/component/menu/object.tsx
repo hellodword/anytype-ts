@@ -357,6 +357,12 @@ class MenuObject extends React.Component<I.Menu> {
 		const block = S.Block.getLeaf(rootId, blockId);
 		const object = S.Detail.get(rootId, rootId);
 		const route = analytics.route.menuObject;
+
+		if (item.id.startsWith('ext:')) {
+			// TODO parse item.id, get ext ID and ext function ID, call ext function with a common struct
+			console.log('ext: clicked', rootId, item, block);
+
+		}
 		
 		if (!block || item.arrow) {
 			return;
@@ -508,11 +514,6 @@ class MenuObject extends React.Component<I.Menu> {
 				break;
 			};
 		};
-
-		if (item.id.startsWith('ext:')) {
-			// TODO parse item.id, get ext ID and ext function ID, call ext function with a common struct
-
-		}
 		
 		if (close) {
 			this.props.close();
