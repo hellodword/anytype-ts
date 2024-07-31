@@ -33,7 +33,7 @@ const PopupSettingsPageExtensions = observer(class PopupSettingsPageExtensions e
 					/>
 					<Button 
 						text="Install"
-						onClick={() => this.onInstallByURL()} 
+						onClick={() => this.onInstallFromURL()} 
 					/>
 				</div>
 			</React.Fragment>
@@ -47,13 +47,13 @@ const PopupSettingsPageExtensions = observer(class PopupSettingsPageExtensions e
 		});
 	};
 
-	onInstallByURL () {
+	onInstallFromURL () {
 		const url: string = this.refURL.getValue();
 
-		console.log('onInstallByURL', url);
+		console.log('onInstallFromURL', url);
 
-		C.ExtensionInstallByURL(url, (message: any) => {
-			console.log('ExtensionInstallByURL', message);
+		C.ExtensionInstallFromURL(url, (message: any) => {
+			console.log('ExtensionInstallFromURL', message);
 		});
 	}
 
