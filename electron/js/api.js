@@ -102,20 +102,16 @@ class Api {
 
 	keytarSet (win, key, value) {
 		if (key && value) {
-			console.log('keytarSet', key, value)
-			// keytar.setPassword(KEYTAR_SERVICE, key, value);
+			keytar.setPassword(KEYTAR_SERVICE, key, value);
 		};
 	};
 
 	async keytarGet (win, key) {
-		console.log('keytarGet', key)
-		return process.env.MNEMONIC;
-		// return await keytar.getPassword(KEYTAR_SERVICE, key);
+		return await keytar.getPassword(KEYTAR_SERVICE, key);
 	};
 
 	keytarDelete (win, key) {
-		console.log('keytarDelete', key)
-		// keytar.deletePassword(KEYTAR_SERVICE, key);
+		keytar.deletePassword(KEYTAR_SERVICE, key);
 	};
 
 	updateCheck (win) {
